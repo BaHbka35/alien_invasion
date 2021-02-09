@@ -10,6 +10,7 @@ from alien import Alien
 from game_stats import GameStats
 from button import Button
 from scoreboard import Scoreboard
+from sounds import Sounds
 
 class AlienInvasion():
     """Overall class to manage game assets and behaviour."""
@@ -17,6 +18,8 @@ class AlienInvasion():
     def __init__(self):
         '''Initialize the game, and create game resources.'''
         pygame.init()
+
+        self.sounds = Sounds()
 
         self.settings = Settings()
 
@@ -221,6 +224,9 @@ class AlienInvasion():
 
     def _ship_hit(self):
         """Respond to the ship being hit by any alien."""
+        # Explosion sound
+        self.sounds.sound1.play()
+
         if self.stats.ships_left > 0:
             # Decrease ships_left.
             self.stats.ships_left -= 1
@@ -238,6 +244,9 @@ class AlienInvasion():
             sleep(0.5)
         else:
             self.stats.game_active = False
+            # Write new high score in file
+            self.stats.update_high_score()
+            
             pygame.mouse.set_visible(True)
 
     def _check_aliens_bottom(self):

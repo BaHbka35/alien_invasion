@@ -24,7 +24,7 @@ class Settings():
         self.score_scale = 1.5
 
         # How quickly the game speeds up.
-        self.speedup_scale = 1.2 # 1.2 default
+        self.speedup_scale = 10 # 1.2 default
 
         self.initialize_dynamic_settings()
 
