@@ -11,6 +11,7 @@ from game_stats import GameStats
 from button import Button
 from scoreboard import Scoreboard
 from sounds import Sounds
+from inscription import Inscription
 
 class AlienInvasion():
     """Overall class to manage game assets and behaviour."""
@@ -40,6 +41,8 @@ class AlienInvasion():
         self._create_fleet()
 
         self.play_button = Button(self, 'Play')
+
+        self.you_lost = Inscription(self)
 
     def run_game(self):
         """Start the main loop for the game."""
@@ -279,6 +282,9 @@ class AlienInvasion():
         # Draw the play button if game inactive
         if not self.stats.game_active:
             self.play_button.draw_button()
+            if self.stats.ships_left == 0:
+                # Draw inscription "You Lost"
+                self.you_lost.draw_inscriptions()
 
         #Make the most recently drawn screen visible.
         pygame.display.flip()
