@@ -22,7 +22,7 @@ class AlienInvasion():
 
         self.sounds = Sounds()
 
-        self.settings = Settings()
+        self.settings = Settings(self)
 
         self.screen = pygame.display.set_mode(
             (self.settings.screen_width,
